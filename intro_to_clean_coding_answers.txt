@@ -10,7 +10,7 @@ Answer: Read the article, and wow what a responsiblity we have as developers whe
 
 3. Would you consider the following to be clean code? Explain why or why not. If not, refactor the code.
 
-FUNCTION convertTemperature(x, y)               
+FUNCTION convertTemperature(x, y, z)               
   IF y = "F" THEN                          
     SET z to (x−32) * (5/9)                 
     PRINT z                       
@@ -20,7 +20,7 @@ FUNCTION convertTemperature(x, y)
   END IF
 END FUNCTION
 
-Answer: Not clean code, refactored: changed function name, proper nesting, got rid of unnecessary comments
+Answer: Not clean code, refactored: changed function name, proper nesting, got rid of unnecessary comments, added z to function parameters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 4. Would you consider the following to be clean code? Explain why or why not. If not, refactor the code.
@@ -42,13 +42,15 @@ Answer: Not clean code, refactored: changed function name, proper nesting, moved
 a. The following function prints the subtotal of a customer's transaction and receives payment accordingly.
 
 FUNCTION checkOutCustomer(subTotal, discountRate, paymentType)
-  PRINT "Your total due is: " + subTotal * discountRate + (subTotal * tax)
+  SET total to subTotal * discountRate + (subTotal * tax)
+  SET change to amount - subTotal * discountRate + (subTotal * tax)
+  PRINT "Your total due is: " + total
   IF paymentType = 'CASH' THEN
     CALL getPayment RETURNING amount
-    PRINT "Change due: " + amount - subTotal * discountRate + (subTotal * tax)
+    PRINT "Change due: " + change 
   ELSE paymentType = 'CREDIT CARD' THEN
     CALL getPayment RETURNING amount
-    PRINT "Your credit card has been charged: " + subTotal * discountRate + (subTotal * tax)
+    PRINT "Your credit card has been charged: " + total
   END IF
 END FUNCTION
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -56,7 +58,8 @@ END FUNCTION
 b. The following function checks out a book if there are no issues with the guest's account.
 
 FUNCTION checkoutBook(book, guest)
-  IF guest.accountActive AND guest.hasOverdueBooks = 0 AND guest.outstandingFees = 0 THEN
+  SET goodStatus to guest.accountActive AND guest.hasOverdueBooks = 0 AND guest.outstandingFees = 0
+  IF goodStatus THEN
     APPEND book to guest.books
     SET book.status to "Checked Out"
     PRINT "Your books have been issued."
@@ -117,6 +120,44 @@ function sumIsPerfectSquare(arr){
 }
 var arr = [10,1,4,6,1,1,2];
 console.log(sumIsPerfectSquare(arr));
+
+7. Duplicate Given an array of integers, find out whether the array contains any duplicate elements. The function should return true if any value appears at least twice in the array, and false if every element is distinct.
+
+function findDuplicates(arr) {
+  let newArr = [];
+  arr.forEach(function(element, index) {    
+    if (arr.indexOf(element, index + 1) > -1) {
+      if (newArr.indexOf(element) === -1) {
+        newArr.push(element);
+      }
+    }
+  });
+  if (newArr.length != 0){
+    console.log(true);
+  } else {
+    console.log(false);
+  }
+}
+console.log(findDuplicates([1, 2, 3, 1]) );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
