@@ -10,12 +10,12 @@ Answer: Read the article, and wow what a responsiblity we have as developers whe
 
 3. Would you consider the following to be clean code? Explain why or why not. If not, refactor the code.
 
-FUNCTION convertTemperature(x, y)               
-  IF y = "F" THEN                          
-    SET fahrenheit to (x−32) * (5/9)                 
+FUNCTION convertTemperature(temperature, scale)               
+  IF scale = "F" THEN                          
+    SET z to (temperature−32) * (5/9)                 
     PRINT z                       
-  ELSE IF y = "C" THEN          
-    SET celcius to x * 1.8000 + 32.00   
+  ELSE IF scale = "C" THEN          
+    SET z to temperature * 1.8000 + 32.00   
     PRINT z                       
   END IF
 END FUNCTION
